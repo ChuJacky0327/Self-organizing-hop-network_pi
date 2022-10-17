@@ -25,7 +25,9 @@ $ sudo dkms status
 $ ifconfig
 ```
 > 備註 :  
-> 在安裝 Driver 時，```sudo dpkg -i *.deb``` 可能要重複下指令
+> 1. 在安裝 Driver 時，```sudo dpkg -i *.deb``` 可能要重複下指令，要確定 linux-header 有成功裝到。  
+> 2. ```sudo make dkms_install``` 後的狀態要為 install，不是 add。  
+> 3. 若安裝完後，```ifconfig``` 沒有 wlan1 出現，則下```sudo dkms remove xxxx/xxx --all```，在重新安裝一次。  
 
 
 
