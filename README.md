@@ -115,3 +115,40 @@ sudo systemctl restart dnsmasq
 $ reboot
 ```
 > 最後要```reboot```設定才會生效 
+***
+## Step4. RTMP & OpenCV install
+* 因為本專案是進行影像畫面的共享傳輸，因此需要安裝 RTMP 串流協定和 OpenCV。
+* 需安裝 nginx-1.16.0 和 ffmpeg。
+```shell
+$ wget http://nginx.org/download/nginx-1.16.0.tar.gz
+$ tar zxvf nginx-1.16.0.tar.gz 
+$ sudo apt-get install build-essential libpcre3 libpcre3-dev libssl-dev libopencv-dev 
+$ cd nginx-1.16.0/
+$ ./configure --add-module=../nginx-rtmp-module
+$ make
+$ sudo make install
+$ sudo gedit /usr/local/nginx/conf/nginx.conf
+```
+**將 nginx.conf 裡的內容新增下段**
+```
+rtmp {
+	server {
+		listen 1935;
+		ping 30s;
+		notify_method get;
+		application rtmp {
+			live on;
+		}
+	}
+     }
+```
+```shell
+$ sudo /usr/local/nginx/sbin/nginx
+$ sudo apt install -y ffmpeg
+$ sudo apt install python3-dev
+$ sudo pip3 install --upgrade pip
+$ pip3 install -U opencv-python
+```
+### 備註 :  
+> 1. Raspberry Pi 開機時，要下```sudo /usr/local/nginx/sbin/nginx```，啟動 nginx 服務。
+> 2. 在網頁輸入``` localhost```，即可得知 nginx 有無啟動。
