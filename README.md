@@ -9,8 +9,9 @@ $ sudo apt-get update
 $ sudo apt upgrade
 $ sudo apt-get dist-upgrade
 ```
+***
 ## Step2. Wifi dongle tp-link archer T2U plus AC600 driver install
-* Raspberry Pi 本身具備網卡(wlan0)，由於要做跳點網路需要地個個網路介面，因此要再添加一隻額外的 Wifi dongle。  
+* Raspberry Pi 本身具備網卡(wlan0)，由於要做**跳點網路**需要第二個網路介面，因此要再添加一隻額外的 Wifi dongle(wlan1)。  
 * 由於使用 AC600 這隻 Wifi dongle，因此需要進行這一步驟，若不是使用 AC600 或已有第二個 interface，可自行略過此步驟。  
 * 參考來源與使用 : 
 ```shell
@@ -24,16 +25,93 @@ $ reboot
 $ sudo dkms status
 $ ifconfig
 ```
-> 備註 :  
-> 1. 在安裝 Driver 時，```sudo dpkg -i *.deb``` 可能要重複下指令，要確定 linux-header 有成功裝到。  
+* ifconfig 後若有兩個 interface (wlan0)(wlan1)，即完成。  
+### 備註 :  
+> 1. 在安裝 Driver 時，```sudo dpkg -i *.deb``` 可能要重複下指令，要確定 **linux-header** 有成功裝到。  
 > 2. ```sudo make dkms_install``` 後的狀態要為 install，不是 add。  
 > 3. 若安裝完後，```ifconfig``` 沒有 wlan1 出現，則下```sudo dkms remove xxxx/xxx --all```，在重新安裝一次。  
+***
+## Step3. Raspberry Pi AP model
+將 wlan1 改成 AP model。
+```shell
+$ sudo apt install gedit
+$ sudo apt install hostapd dnsmasq -y
+$ sudo systemctl stop dnsmasq
+$ sudo systemctl stop hostapd
+$ sudo gedit /etc/dhcpcd.conf
+```
+**將 dhcpcd.conf 裡的內容改成 :**
+```
+interface wlan1
+    static ip_address=192.168.51.1/24
+    nohook wpa_supplicant
+```
+> ip address 可自行設定為 192.168.xx.1  
 
+&emsp;
+```shell
+$ sudo service dhcpcd restart
+$ sudo gedit /etc/dnsmasq.conf
+```
+**將 dnsmasq.conf 裡的內容改成 :**
+```
+interface=wlan1
+bind-interfaces 
+server=8.8.8.8
+domain-needed
+bogus-priv
+dhcp-range=192.168.51.2,192.168.51.20,24h
+```
+> interface 要設定為變更成 AP model 的那個網卡  
 
+&emsp;
+```shell
+$ sudo gedit /etc/hostapd/hostapd.conf
+```
+**將 hostapd.conf 裡的內容改成 :**
+```
+ctrl_interface=/var/run/hostapd
+ctrl_interface_group=0
+interface=wlan1
+driver=nl80211
+ssid=pig-r1
+hw_mode=a
+channel=44
+ieee80211ac=1
+ieee80211n=1
+wmm_enabled=0
+macaddr_acl=0
+auth_algs=1
+wpa=2
+wpa_key_mgmt=WPA-PSK
+wpa_passphrase=relay10327
+wpa_pairwise=TKIP
+rsn_pairwise=CCMP
+```
+> ssid 為無線網路名稱(可自行設定)
+> wpa_passphrase 為無線網路的密碼(可自行設定)  
 
-
-
-
-
-
-
+&emsp;
+```shell
+$ sudo gedit /etc/default/hostapd
+```
+**文件中找到以下字據並修改成 :**
+```
+DAEMON_CONF="/etc/hostapd/hostapd.conf
+```
+```shell
+$ sudo systemctl unmask hostapd
+$ sudo systemctl enable hostapd
+$ sudo systemctl unmask hostapd
+$ sudo systemctl restart dnsmasq
+$ sudo gedit /etc/rc.local 
+```
+**往下找到 exit 0，並在該行的上方輸入下列內容 :**
+```
+sudo systemctl unmask hostapd
+sudo systemctl restart dnsmasq
+```
+```shell
+$ reboot
+```
+> 最後要```reboot```設定才會生效 
