@@ -24,4 +24,14 @@ $ reboot
 $ sudo dkms status
 $ ifconfig
 ```
+> 備註 :  
+> 在安裝 Driver 時，```sudo dpkg -i *.deb``` 
+
+
+
+
+
+
+
+
 
