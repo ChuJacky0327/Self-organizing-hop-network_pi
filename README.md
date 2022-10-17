@@ -11,6 +11,14 @@ $ sudo apt-get dist-upgrade
 ```
 ## Step2. Wifi dongle tp-link archer T2U plus AC600 driver install
 ```shell
-$ test
+$ cd AC600/
+$ sudo rm /var/lib/dpkg/lock-frontend 
+$ sudo rm /var/lib/dpkg/lock
+$ sudo dpkg -i *.deb
+$ cd rtl8812au/
+$ sudo make dkms_install
+$ reboot
+$ sudo dkms status
+$ ifconfig
 ```
 
