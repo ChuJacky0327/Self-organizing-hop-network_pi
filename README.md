@@ -151,4 +151,7 @@ $ pip3 install -U opencv-python
 ```
 ### 備註 :  
 > 1. Raspberry Pi 開機時，要下```sudo /usr/local/nginx/sbin/nginx```，啟動 nginx 服務。
-> 2. 在網頁輸入``` localhost```，即可得知 nginx 有無啟動。
+> 2. 在網頁輸入```localhost```，即可得知 nginx 有無啟動。
+***
+## Step5. Test and Demo
+將 Webcam 接上 Rasberry Pi，使用```ls /dev/video*```，即可得知攝影機是否有接上。
