@@ -10,6 +10,7 @@ $ sudo apt upgrade
 $ sudo apt-get dist-upgrade
 ```
 ## Step2. Wifi dongle tp-link archer T2U plus AC600 driver install
+這一步驟是因為
 ```shell
 $ cd AC600/
 $ sudo rm /var/lib/dpkg/lock-frontend 
