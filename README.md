@@ -4,7 +4,11 @@
 ## Step1. Raspberry Pi Update
 ```shell
 $ sudo apt update
+```
+```shell
 $ sudo apt install dkms git
+```
+```shell
 $ sudo apt-get update
 $ sudo apt upgrade
 $ sudo apt-get dist-upgrade
