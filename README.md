@@ -3,6 +3,6 @@
 ***
 ## Step1. AC600 Driver install
 ```shell
-code
+$ test
 ```
 
