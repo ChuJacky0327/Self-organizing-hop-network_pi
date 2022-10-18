@@ -1,5 +1,9 @@
 # Self-organizing-hop-network
-在 Raspberry Pi 中使用自組織跳點網路  
+在 Raspberry Pi 中使用自組織跳點網路，實現畫面協作共享  
+#### 模擬情景 :  
+車輛所看到的畫面要進行畫面共享給後方車輛，但距離過遠無法進行傳輸，需透過中間節點進行協作  
+pig-r1 和 pig-r3 因為距離過遠無法直接通訊，因此運用跳點網路先將數據傳給 pig-r2，在由 pig-r2 傳輸給 pig-r3，以此這三個節點將會形成**自組織跳點網路，只有這自組織內的節點能夠相互溝通**
+> 以下為範例圖 :  
 
 ![image](https://github.com/ChuJacky0327/Self-organizing-hop-network/blob/main/HopNetwork.jpg)
 ***
