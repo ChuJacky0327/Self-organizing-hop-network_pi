@@ -10,7 +10,8 @@ $ sudo apt install dkms git
 $ sudo apt-get update
 $ sudo apt upgrade
 $ sudo apt-get dist-upgrade
-$ git
+$ git clone https://github.com/ChuJacky0327/Self-organizing-hop-network.git
+$ cd Self-organizing-hop-network
 ```
 ***
 ## Step2. Wifi dongle tp-link archer T2U plus AC600 driver install
@@ -159,3 +160,29 @@ $ pip3 install -U opencv-python
 ***
 ## Step5. Test and Demo
 Raspberry 事先先開好 camera 功能，將 Webcam 接上 Rasberry Pi，使用```ls /dev/video*```，即可得知攝影機是否有接上。
+### 測試 Webcam 能否使用 :
+```shell
+$ python3 cam_test.py
+```
+### 跳點網路影像傳輸 DEMO :
+#### pig-r1:
+* pig-r1 連上 pig-r2 的 AP 網路，可下```ifconfig```查看 ip address
+* 只有 pig-r1 接上攝影機，將 pig-r1 所看到的畫面推到 RTMP 的 nginx 上
+```shell
+$ python3 RTMP_push-relay1.py
+```
+#### pig-r2:
+* pig-r2 連上 pig-r3 的 AP 網路，可下```ifconfig```查看 ip address
+* pig-r2 去拉 pig-r1 所傳輸的影像畫面，並保存
+* 將 pig-r2 所保存的影像推到 RTMP 的 nginx 上
+```shell
+$ python3 RTMP_pull-relay2.py
+$ python3 RTMP_push-relay2.py
+```
+#### pig-r3:
+* pig-r3 去拉 pig-r2 所傳輸的影像畫面
+```shell
+$ python3 RTMP_pull-relay3.py
+```
+***
+即此完成自組織跳點網路的影像畫面共享傳輸
