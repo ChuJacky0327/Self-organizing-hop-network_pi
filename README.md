@@ -1,5 +1,7 @@
 # Self-organizing-hop-network
-在 Raspberry Pi 中使用自組織跳點網路
+在 Raspberry Pi 中使用自組織跳點網路  
+
+![image](https://github.com/ChuJacky0327/Self-organizing-hop-network/blob/main/HopNetwork.jpg)
 ***
 ## Step1. Raspberry Pi Update
 ```shell
