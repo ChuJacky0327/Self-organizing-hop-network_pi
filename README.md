@@ -10,6 +10,7 @@ $ sudo apt install dkms git
 $ sudo apt-get update
 $ sudo apt upgrade
 $ sudo apt-get dist-upgrade
+$ git
 ```
 ***
 ## Step2. Wifi dongle tp-link archer T2U plus AC600 driver install
@@ -122,6 +123,7 @@ $ reboot
 * 因為本專案是進行影像畫面的共享傳輸，因此需要安裝 RTMP 串流協定和 OpenCV。
 * 需安裝 nginx-1.16.0 和 ffmpeg。
 ```shell
+$ git clone https://github.com/arut/nginx-rtmp-module.git
 $ wget http://nginx.org/download/nginx-1.16.0.tar.gz
 $ tar zxvf nginx-1.16.0.tar.gz 
 $ sudo apt-get install build-essential libpcre3 libpcre3-dev libssl-dev libopencv-dev 
