@@ -13,7 +13,7 @@ $ sudo apt-get dist-upgrade
 ## Step2. Wifi dongle tp-link archer T2U plus AC600 driver install
 * Raspberry Pi 本身具備網卡(wlan0)，由於要做**跳點網路**需要第二個網路介面，因此要再添加一隻額外的 Wifi dongle(wlan1)。  
 * 由於使用 AC600 這隻 Wifi dongle，因此需要進行這一步驟，若不是使用 AC600 或已有第二個 interface，可自行略過此步驟。  
-* 參考來源與使用 : 
+* 參考來源與使用 : [https://blog.cavedu.com/2021/05/13/tp-link-archer-t2u-plus-ac600/](https://blog.cavedu.com/2021/05/13/tp-link-archer-t2u-plus-ac600/)
 ```shell
 $ cd AC600/
 $ sudo rm /var/lib/dpkg/lock-frontend 
