@@ -116,8 +116,8 @@ $ sudo gedit /etc/rc.local
 ```
 **往下找到 exit 0，並在該行的上方輸入下列內容 :**
 ```
-sudo systemctl unmask hostapd
-sudo systemctl restart dnsmasq
+$ sudo systemctl unmask hostapd
+$ sudo systemctl restart dnsmasq
 ```
 ```shell
 $ reboot
