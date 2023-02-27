@@ -15,7 +15,7 @@ $ sudo apt-get update
 $ sudo apt upgrade
 $ sudo apt-get dist-upgrade
 $ git clone https://github.com/ChuJacky0327/Self-organizing-hop-network_pi.git
-$ cd Self-organizing-hop-network
+$ cd Self-organizing-hop-network_pi
 ```
 ***
 ## Step2. Wifi dongle tp-link archer T2U plus AC600 driver install
