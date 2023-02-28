@@ -190,3 +190,5 @@ $ python3 RTMP_pull-relay3.py
 ```
 ***
 即此完成自組織跳點網路的影像畫面共享傳輸
+### 備註 :  
+> * code 裡的 ipaddress 要自行換成自己設定的 ipaddress。 
